@@ -19,6 +19,7 @@ extension LogstashLogHandler {
         let loglevel: Logger.Level
         let message: Logger.Message
         let metadata: Logger.Metadata
+        let app: [String: String]
     }
 
     /// The `JSONEncoder` used to encode the `LogstashHTTPBody` to JSON
@@ -80,7 +81,8 @@ extension LogstashLogHandler {
                 label: self.label,
                 loglevel: level,
                 message: message,
-                metadata: metadata
+                metadata: metadata,
+                app: ["type": "link.app.ios"]
             )
 
             return try Self.jsonEncoder.encode(bodyObject)
