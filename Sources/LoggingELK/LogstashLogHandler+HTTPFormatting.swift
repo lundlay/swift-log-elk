@@ -53,6 +53,12 @@ extension LogstashLogHandler {
         } catch {
             fatalError("Logstash HTTP Request couldn't be created. Check if the hostname and port are valid. \(error)")
         }
+        
+        if let user = user, let password = password {
+            let authorization = HTTPClient.Authorization.basic(username: user, password: password)
+            httpRequest.headers.add(name: "Authorization", value: authorization.headerValue)
+            print("Authorization:", authorization.headerValue)
+        }
 
         // Set headers that always stay consistent over all requests
         httpRequest.headers.add(name: "Content-Type", value: "application/json")

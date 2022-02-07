@@ -22,6 +22,10 @@ public struct LogstashLogHandler: LogHandler {
     static var port: Int?
     /// Specifies if the HTTP connection to Logstash should be encrypted via TLS (so HTTPS instead of HTTP)
     static var useHTTPS: Bool?
+    /// Specifies user name for Basic Authentification
+    static var user: String?
+    /// Specifies password for Basic Authentification
+    static var password: String?
     /// The `EventLoopGroup` which is used to create the `HTTPClient`
     static var eventLoopGroup: EventLoopGroup?
     /// Used to log background activity of the `LogstashLogHandler` and `HTTPClient`
@@ -89,6 +93,8 @@ public struct LogstashLogHandler: LogHandler {
     public static func setup(hostname: String,
                              port: Int,
                              useHTTPS: Bool = false,
+                             user: String? = nil,
+                             password: String? = nil,
                              eventLoopGroup: EventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: (System.coreCount != 1) ? System.coreCount / 2 : 1),
                              backgroundActivityLogger: Logger = Logger(label: "backgroundActivity-logstashHandler"),
                              uploadInterval: TimeAmount = TimeAmount.seconds(3),
@@ -101,6 +107,8 @@ public struct LogstashLogHandler: LogHandler {
         Self.hostname = hostname
         Self.port = port
         Self.useHTTPS = useHTTPS
+        Self.user = user
+        Self.password = password
         Self.eventLoopGroup = eventLoopGroup
         Self.backgroundActivityLogger = backgroundActivityLogger
         Self.uploadInterval = uploadInterval
