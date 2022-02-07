@@ -157,6 +157,9 @@ public struct LogstashLogHandler: LogHandler {
                 "Error during encoding log data",
                 metadata: [
                     "label": .string(self.label),
+                    "app": .dictionary( [
+                        "type": .string("link.app.ios")
+                    ]),
                     "logEntry": .dictionary(
                         [
                             "message": .string(message.description),
@@ -179,6 +182,9 @@ public struct LogstashLogHandler: LogHandler {
                 "Lock on the log data byte buffer couldn't be aquired",
                 metadata: [
                     "label": .string(self.label),
+                    "app": .dictionary( [
+                        "type": .string("link.app.ios")
+                    ]),
                     "logStorage": .dictionary(
                         [
                             "readableBytes": .string("\(Self.byteBuffer!.readableBytes)"),
@@ -205,6 +211,9 @@ public struct LogstashLogHandler: LogHandler {
                     "A single log entry is larger than the configured log storage size",
                     metadata: [
                         "label": .string(self.label),
+                    "app": .dictionary( [
+                        "type": .string("link.app.ios")
+                    ]),
                         "logStorageSize": .string("\(Self.byteBuffer!.capacity)"),
                         "logEntry": .dictionary(
                             [
@@ -244,6 +253,9 @@ public struct LogstashLogHandler: LogHandler {
                 "Lock on the log data byte buffer couldn't be aquired",
                 metadata: [
                     "label": .string(self.label),
+                    "app": .dictionary( [
+                        "type": .string("link.app.ios")
+                    ]),
                     "logStorage": .dictionary(
                         [
                             "readableBytes": .string("\(Self.byteBuffer!.readableBytes)"),
